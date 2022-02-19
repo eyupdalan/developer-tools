@@ -1,8 +1,7 @@
-import {Avatar, Group, Navbar as MNavbar, Text, UnstyledButton} from "@mantine/core";
+import {Navbar as MNavbar} from "@mantine/core";
 import {NavbarProps} from "./layout.types";
-import {Link} from "@remix-run/react";
-import {faFont} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faFont, faLaptopCode} from "@fortawesome/free-solid-svg-icons";
+import MenuItem from "~/components/Layout/menuItem";
 
 export default function Navbar({opened}: NavbarProps) {
     return (
@@ -12,20 +11,12 @@ export default function Navbar({opened}: NavbarProps) {
             hidden={!opened}
             width={{base: 300, lg: 400}}
             styles={{
-                root: { height: "calc(100vh - 80px)"}
+                root: {height: "calc(100vh - 80px)"}
             }}
         >
             <MNavbar.Section grow mt="lg">
-                <Link to={"/case-converter"}>
-                    <UnstyledButton>
-                        <Group>
-                            <Avatar>
-                                <FontAwesomeIcon icon={faFont}/>
-                            </Avatar>
-                            <Text>Case converter</Text>
-                        </Group>
-                    </UnstyledButton>
-                </Link>
+                <MenuItem link={"/case-converter"} font={faFont} title={"Case Converter"}/>
+                <MenuItem link={"/base64-converter"} font={faLaptopCode} title={"Base64 Converter"}/>
             </MNavbar.Section>
             <MNavbar.Section>Footer</MNavbar.Section>
         </MNavbar>

@@ -1,4 +1,5 @@
 import {ReactChild, ReactChildren} from "react";
+import {IconProp} from "@fortawesome/fontawesome-svg-core";
 
 declare type StateChangeFunction<T> = (param:T)=>T;
 
@@ -15,4 +16,10 @@ interface NavbarProps {
     opened: boolean
 }
 
-export type { LayoutProps, HeaderProps, NavbarProps };
+interface MenuItemProps {
+    link: string,
+    font: IconProp,
+    title: string
+}
+
+export type { LayoutProps, HeaderProps, NavbarProps, MenuItemProps };
