@@ -1,5 +1,5 @@
-import {ReactChild, ReactChildren} from "react";
-import {IconProp} from "@fortawesome/fontawesome-svg-core";
+import { ReactChild, ReactChildren } from 'react';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 declare type StateChangeFunction<T> = (param:T)=>T;
 
@@ -23,4 +23,6 @@ interface MenuItemProps {
     color?: string
 }
 
-export type { LayoutProps, HeaderProps, NavbarProps, MenuItemProps };
+export type {
+  LayoutProps, HeaderProps, NavbarProps, MenuItemProps,
+};

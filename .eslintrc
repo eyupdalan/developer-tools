@@ -1,0 +1,30 @@
+{
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "@remix-run/eslint-config",
+    "@remix-run/eslint-config/jest"
+  ],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
+  }
+}

@@ -1,179 +1,179 @@
-/*\
+/* eslint-disable */
+//
+/* \
 |*|
 |*|  Base64 / binary data / UTF-8 strings utilities
 |*|
 |*|  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Base64_encoding_and_decoding
 |*|
-\*/
+\ */
 
 /* Array of bytes to Base64 string decoding */
 export function b64ToUint6(nChr: number) {
-    return nChr > 64 && nChr < 91 ?
-        nChr - 65
-        : nChr > 96 && nChr < 123 ?
-            nChr - 71
-            : nChr > 47 && nChr < 58 ?
-                nChr + 4
-                : nChr === 43 ?
-                    62
-                    : nChr === 47 ?
-                        63
-                        :
-                        0;
-
+  return nChr > 64 && nChr < 91
+    ? nChr - 65
+    : nChr > 96 && nChr < 123
+      ? nChr - 71
+      : nChr > 47 && nChr < 58
+        ? nChr + 4
+        : nChr === 43
+          ? 62
+          : nChr === 47
+            ? 63
+            : 0;
 }
 
 export function base64DecToArr(sBase64: string, nBlocksSize: undefined | number):Uint8Array {
-    const sB64Enc = sBase64.replace(/[^A-Za-z0-9\+\/]/g, ""), nInLen = sB64Enc.length,
-        nOutLen = nBlocksSize ? Math.ceil((nInLen * 3 + 1 >> 2) / nBlocksSize) * nBlocksSize : nInLen * 3 + 1 >> 2,
-        taBytes = new Uint8Array(nOutLen);
+  const sB64Enc = sBase64.replace(/[^A-Za-z0-9\+\/]/g, ''); const nInLen = sB64Enc.length;
+  const nOutLen = nBlocksSize ? Math.ceil((nInLen * 3 + 1 >> 2) / nBlocksSize) * nBlocksSize : nInLen * 3 + 1 >> 2;
+  const taBytes = new Uint8Array(nOutLen);
 
-    let nMod3, nMod4, nUint24 = 0, nOutIdx = 0, nInIdx = 0;
-    for (; nInIdx < nInLen; nInIdx++) {
-        nMod4 = nInIdx & 3;
-        nUint24 |= b64ToUint6(sB64Enc.charCodeAt(nInIdx)) << 6 * (3 - nMod4);
-        if (nMod4 === 3 || nInLen - nInIdx === 1) {
-            for (nMod3 = 0; nMod3 < 3 && nOutIdx < nOutLen; nMod3++, nOutIdx++) {
-                taBytes[nOutIdx] = nUint24 >>> (16 >>> nMod3 & 24) & 255;
-            }
-            nUint24 = 0;
-        }
+  let nMod3; let nMod4; let nUint24 = 0; let nOutIdx = 0; let
+    nInIdx = 0;
+  for (; nInIdx < nInLen; nInIdx++) {
+    nMod4 = nInIdx & 3;
+    nUint24 |= b64ToUint6(sB64Enc.charCodeAt(nInIdx)) << 6 * (3 - nMod4);
+    if (nMod4 === 3 || nInLen - nInIdx === 1) {
+      for (nMod3 = 0; nMod3 < 3 && nOutIdx < nOutLen; nMod3++, nOutIdx++) {
+        taBytes[nOutIdx] = nUint24 >>> (16 >>> nMod3 & 24) & 255;
+      }
+      nUint24 = 0;
     }
+  }
 
-    return taBytes;
+  return taBytes;
 }
 
 /* Base64 string to array encoding */
 export function uint6ToB64(nUint6: number) {
-    return nUint6 < 26 ?
-        nUint6 + 65
-        : nUint6 < 52 ?
-            nUint6 + 71
-            : nUint6 < 62 ?
-                nUint6 - 4
-                : nUint6 === 62 ?
-                    43
-                    : nUint6 === 63 ?
-                        47
-                        :
-                        65;
-
+  return nUint6 < 26
+    ? nUint6 + 65
+    : nUint6 < 52
+      ? nUint6 + 71
+      : nUint6 < 62
+        ? nUint6 - 4
+        : nUint6 === 62
+          ? 43
+          : nUint6 === 63
+            ? 47
+            : 65;
 }
 
 export function base64EncArr(aBytes: Uint8Array) {
+  let nMod3 = 2; let
+    sB64Enc = '';
 
-    let nMod3 = 2, sB64Enc = "";
-
-    let nLen = aBytes.length, nUint24 = 0, nIdx = 0;
-    for (; nIdx < nLen; nIdx++) {
-        nMod3 = nIdx % 3;
-        if (nIdx > 0 && (nIdx * 4 / 3) % 76 === 0) {
-            sB64Enc += "\r\n";
-        }
-        nUint24 |= aBytes[nIdx] << (16 >>> nMod3 & 24);
-        if (nMod3 === 2 || aBytes.length - nIdx === 1) {
-            sB64Enc += String.fromCodePoint(uint6ToB64(nUint24 >>> 18 & 63), uint6ToB64(nUint24 >>> 12 & 63), uint6ToB64(nUint24 >>> 6 & 63), uint6ToB64(nUint24 & 63));
-            nUint24 = 0;
-        }
+  const nLen = aBytes.length; let nUint24 = 0; let
+    nIdx = 0;
+  for (; nIdx < nLen; nIdx++) {
+    nMod3 = nIdx % 3;
+    if (nIdx > 0 && (nIdx * 4 / 3) % 76 === 0) {
+      sB64Enc += '\r\n';
     }
+    nUint24 |= aBytes[nIdx] << (16 >>> nMod3 & 24);
+    if (nMod3 === 2 || aBytes.length - nIdx === 1) {
+      sB64Enc += String.fromCodePoint(uint6ToB64(nUint24 >>> 18 & 63), uint6ToB64(nUint24 >>> 12 & 63), uint6ToB64(nUint24 >>> 6 & 63), uint6ToB64(nUint24 & 63));
+      nUint24 = 0;
+    }
+  }
 
-    return sB64Enc.substr(0, sB64Enc.length - 2 + nMod3) + (nMod3 === 2 ? '' : nMod3 === 1 ? '=' : '==');
-
+  return sB64Enc.substr(0, sB64Enc.length - 2 + nMod3) + (nMod3 === 2 ? '' : nMod3 === 1 ? '=' : '==');
 }
 
 /* UTF-8 array to DOMString and vice versa */
 export function UTF8ArrToStr(aBytes: Uint8Array) {
-    let sView = "";
+  let sView = '';
 
-    let nPart, nLen = aBytes.length, nIdx = 0;
-    for (; nIdx < nLen; nIdx++) {
-        nPart = aBytes[nIdx];
-        sView += String.fromCodePoint(
-            nPart > 251 && nPart < 254 && nIdx + 5 < nLen ? /* six bytes */
-                /* (nPart - 252 << 30) may be not so safe in ECMAScript! So...: */
-                (nPart - 252) * 1073741824 + (aBytes[++nIdx] - 128 << 24) + (aBytes[++nIdx] - 128 << 18) + (aBytes[++nIdx] - 128 << 12) + (aBytes[++nIdx] - 128 << 6) + aBytes[++nIdx] - 128
-                : nPart > 247 && nPart < 252 && nIdx + 4 < nLen ? /* five bytes */
-                    (nPart - 248 << 24) + (aBytes[++nIdx] - 128 << 18) + (aBytes[++nIdx] - 128 << 12) + (aBytes[++nIdx] - 128 << 6) + aBytes[++nIdx] - 128
-                    : nPart > 239 && nPart < 248 && nIdx + 3 < nLen ? /* four bytes */
-                        (nPart - 240 << 18) + (aBytes[++nIdx] - 128 << 12) + (aBytes[++nIdx] - 128 << 6) + aBytes[++nIdx] - 128
-                        : nPart > 223 && nPart < 240 && nIdx + 2 < nLen ? /* three bytes */
-                            (nPart - 224 << 12) + (aBytes[++nIdx] - 128 << 6) + aBytes[++nIdx] - 128
-                            : nPart > 191 && nPart < 224 && nIdx + 1 < nLen ? /* two bytes */
-                                (nPart - 192 << 6) + aBytes[++nIdx] - 128
-                                : /* nPart < 127 ? */ /* one byte */
-                                nPart
-        );
-    }
+  let nPart; const nLen = aBytes.length; let
+    nIdx = 0;
+  for (; nIdx < nLen; nIdx++) {
+    nPart = aBytes[nIdx];
+    sView += String.fromCodePoint(
+      nPart > 251 && nPart < 254 && nIdx + 5 < nLen /* six bytes */
+      /* (nPart - 252 << 30) may be not so safe in ECMAScript! So...: */
+        ? (nPart - 252) * 1073741824 + (aBytes[++nIdx] - 128 << 24) + (aBytes[++nIdx] - 128 << 18) + (aBytes[++nIdx] - 128 << 12) + (aBytes[++nIdx] - 128 << 6) + aBytes[++nIdx] - 128
+        : nPart > 247 && nPart < 252 && nIdx + 4 < nLen /* five bytes */
+          ? (nPart - 248 << 24) + (aBytes[++nIdx] - 128 << 18) + (aBytes[++nIdx] - 128 << 12) + (aBytes[++nIdx] - 128 << 6) + aBytes[++nIdx] - 128
+          : nPart > 239 && nPart < 248 && nIdx + 3 < nLen /* four bytes */
+            ? (nPart - 240 << 18) + (aBytes[++nIdx] - 128 << 12) + (aBytes[++nIdx] - 128 << 6) + aBytes[++nIdx] - 128
+            : nPart > 223 && nPart < 240 && nIdx + 2 < nLen /* three bytes */
+              ? (nPart - 224 << 12) + (aBytes[++nIdx] - 128 << 6) + aBytes[++nIdx] - 128
+              : nPart > 191 && nPart < 224 && nIdx + 1 < nLen /* two bytes */
+                ? (nPart - 192 << 6) + aBytes[++nIdx] - 128
+                : /* nPart < 127 ? */ /* one byte */
+                nPart,
+    );
+  }
 
-    return sView;
-
+  return sView;
 }
 
 export function strToUTF8Arr(sDOMStr: string): Uint8Array {
-    let aBytes, nChr: number | undefined, nStrLen = sDOMStr.length, nArrLen = 0;
+  let aBytes; let nChr: number | undefined; const nStrLen = sDOMStr.length; let
+    nArrLen = 0;
 
-    /* mapping... */
+  /* mapping... */
 
-    for (let nMapIdx = 0; nMapIdx < nStrLen; nMapIdx++) {
-        nChr = sDOMStr.codePointAt(nMapIdx);
+  for (let nMapIdx = 0; nMapIdx < nStrLen; nMapIdx++) {
+    nChr = sDOMStr.codePointAt(nMapIdx);
 
-        if (nChr && nChr > 65536) {
-            nMapIdx++;
-        }
-
-        nArrLen += nChr ? (nChr < 0x80 ? 1 : nChr < 0x800 ? 2 : nChr < 0x10000 ? 3 : nChr < 0x200000 ? 4 : nChr < 0x4000000 ? 5 : 6) : 0;
+    if (nChr && nChr > 65536) {
+      nMapIdx++;
     }
 
-    aBytes = new Uint8Array(nArrLen);
+    nArrLen += nChr ? (nChr < 0x80 ? 1 : nChr < 0x800 ? 2 : nChr < 0x10000 ? 3 : nChr < 0x200000 ? 4 : nChr < 0x4000000 ? 5 : 6) : 0;
+  }
 
-    /* transcription... */
+  aBytes = new Uint8Array(nArrLen);
 
-    let nIdx = 0, nChrIdx = 0;
-    for (; nIdx < nArrLen; nChrIdx++) {
-        nChr = sDOMStr.codePointAt(nChrIdx);
-        if (!nChr) {
-            continue;
-        }
+  /* transcription... */
 
-        if (nChr < 128) {
-            /* one byte */
-            aBytes[nIdx++] = nChr;
-        } else if (nChr < 0x800) {
-            /* two bytes */
-            aBytes[nIdx++] = 192 + (nChr >>> 6);
-            aBytes[nIdx++] = 128 + (nChr & 63);
-        } else if (nChr < 0x10000) {
-            /* three bytes */
-            aBytes[nIdx++] = 224 + (nChr >>> 12);
-            aBytes[nIdx++] = 128 + (nChr >>> 6 & 63);
-            aBytes[nIdx++] = 128 + (nChr & 63);
-        } else if (nChr < 0x200000) {
-            /* four bytes */
-            aBytes[nIdx++] = 240 + (nChr >>> 18);
-            aBytes[nIdx++] = 128 + (nChr >>> 12 & 63);
-            aBytes[nIdx++] = 128 + (nChr >>> 6 & 63);
-            aBytes[nIdx++] = 128 + (nChr & 63);
-            nChrIdx++;
-        } else if (nChr < 0x4000000) {
-            /* five bytes */
-            aBytes[nIdx++] = 248 + (nChr >>> 24);
-            aBytes[nIdx++] = 128 + (nChr >>> 18 & 63);
-            aBytes[nIdx++] = 128 + (nChr >>> 12 & 63);
-            aBytes[nIdx++] = 128 + (nChr >>> 6 & 63);
-            aBytes[nIdx++] = 128 + (nChr & 63);
-            nChrIdx++;
-        } else /* if (nChr <= 0x7fffffff) */ {
-            /* six bytes */
-            aBytes[nIdx++] = 252 + (nChr >>> 30);
-            aBytes[nIdx++] = 128 + (nChr >>> 24 & 63);
-            aBytes[nIdx++] = 128 + (nChr >>> 18 & 63);
-            aBytes[nIdx++] = 128 + (nChr >>> 12 & 63);
-            aBytes[nIdx++] = 128 + (nChr >>> 6 & 63);
-            aBytes[nIdx++] = 128 + (nChr & 63);
-            nChrIdx++;
-        }
+  let nIdx = 0; let
+    nChrIdx = 0;
+  for (; nIdx < nArrLen; nChrIdx++) {
+    nChr = sDOMStr.codePointAt(nChrIdx);
+    if (!nChr) {
+      continue;
     }
 
-    return aBytes;
+    if (nChr < 128) {
+      /* one byte */
+      aBytes[nIdx++] = nChr;
+    } else if (nChr < 0x800) {
+      /* two bytes */
+      aBytes[nIdx++] = 192 + (nChr >>> 6);
+      aBytes[nIdx++] = 128 + (nChr & 63);
+    } else if (nChr < 0x10000) {
+      /* three bytes */
+      aBytes[nIdx++] = 224 + (nChr >>> 12);
+      aBytes[nIdx++] = 128 + (nChr >>> 6 & 63);
+      aBytes[nIdx++] = 128 + (nChr & 63);
+    } else if (nChr < 0x200000) {
+      /* four bytes */
+      aBytes[nIdx++] = 240 + (nChr >>> 18);
+      aBytes[nIdx++] = 128 + (nChr >>> 12 & 63);
+      aBytes[nIdx++] = 128 + (nChr >>> 6 & 63);
+      aBytes[nIdx++] = 128 + (nChr & 63);
+      nChrIdx++;
+    } else if (nChr < 0x4000000) {
+      /* five bytes */
+      aBytes[nIdx++] = 248 + (nChr >>> 24);
+      aBytes[nIdx++] = 128 + (nChr >>> 18 & 63);
+      aBytes[nIdx++] = 128 + (nChr >>> 12 & 63);
+      aBytes[nIdx++] = 128 + (nChr >>> 6 & 63);
+      aBytes[nIdx++] = 128 + (nChr & 63);
+      nChrIdx++;
+    } else /* if (nChr <= 0x7fffffff) */ {
+      /* six bytes */
+      aBytes[nIdx++] = 252 + (nChr >>> 30);
+      aBytes[nIdx++] = 128 + (nChr >>> 24 & 63);
+      aBytes[nIdx++] = 128 + (nChr >>> 18 & 63);
+      aBytes[nIdx++] = 128 + (nChr >>> 12 & 63);
+      aBytes[nIdx++] = 128 + (nChr >>> 6 & 63);
+      aBytes[nIdx++] = 128 + (nChr & 63);
+      nChrIdx++;
+    }
+  }
 
+  return aBytes;
 }

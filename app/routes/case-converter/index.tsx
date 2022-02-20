@@ -1,3 +1,4 @@
-import {withLayout} from "~/components/Layout";
-import CaseConverter from "./caseConverter";
+import { withLayout } from '~/components/Layout';
+import CaseConverter from './caseConverter';
+
 export default withLayout(CaseConverter);

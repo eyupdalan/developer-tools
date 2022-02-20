@@ -24,9 +24,16 @@
   },
   "devDependencies": {
     "@remix-run/dev": "^1.2.1",
+    "@remix-run/eslint-config": "^1.2.1",
     "@types/lodash": "^4.14.178",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
     "typescript": "^4.5.5"
   },
   "engines": {
@@ -37,7 +44,9 @@
     "postinstall": "remix setup node",
     "build": "remix build",
     "dev": "cross-env NODE_ENV=development netlify dev",
-    "start": "cross-env NODE_ENV=production netlify dev"
+    "start": "cross-env NODE_ENV=production netlify dev",
+    "fix": "yarn lint --fix",
+    "lint": "eslint -c .eslintrc --ext .ts,.tsx ."
   },
   "packageManager": "yarn@3.1.1"
 }

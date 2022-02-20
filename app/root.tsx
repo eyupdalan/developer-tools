@@ -4,13 +4,11 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration
-} from "remix";
-import type { MetaFunction } from "remix";
+  ScrollRestoration,
+} from 'remix';
+import type { MetaFunction } from 'remix';
 
-export const meta: MetaFunction = () => {
-  return { title: "Developer Tools" };
-};
+export const meta: MetaFunction = () => ({ title: 'Developer Tools' });
 
 export default function App() {
   return (

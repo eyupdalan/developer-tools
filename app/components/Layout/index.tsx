@@ -1,14 +1,12 @@
-import Layout from "./layout";
-import {ComponentType} from "react";
+import { ComponentType } from 'react';
+import Layout from './layout';
 
-export function withLayout(Component: ComponentType) {
-    return () => {
-        return (
-            <Layout>
-                <Component/>
-            </Layout>
-        )
-    }
-}
+export const withLayout = (Component: ComponentType) => function () {
+  return (
+    <Layout>
+      <Component />
+    </Layout>
+  );
+};
 
 export default Layout;
