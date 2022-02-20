@@ -50,7 +50,7 @@ export default function CaseConverter() {
       </Grid.Col>
       <Grid.Col span={12} sx={{ height: '90%' }} gutter="sm">
         <Grid sx={{ height: '100%' }}>
-          <Grid.Col span={5}>
+          <Grid.Col md={5} sm={12}>
             <Textarea
               placeholder="Enter text here"
               value={input}
@@ -63,7 +63,7 @@ export default function CaseConverter() {
               onChange={onChangeInput}
             />
           </Grid.Col>
-          <Grid.Col span={2} sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center' }}>
+          <Grid.Col md={2} sm={12} sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center' }}>
             <RadioGroup
               variant="vertical"
               value={selectedCase}
@@ -75,7 +75,7 @@ export default function CaseConverter() {
               <Radio value="startcase">Start case</Radio>
             </RadioGroup>
           </Grid.Col>
-          <Grid.Col span={5}>
+          <Grid.Col md={5} sm={12}>
             <Textarea
               placeholder="You will see results here"
               value={result}

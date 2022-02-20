@@ -7,8 +7,7 @@ import {
 } from '~/routes/base64-converter/converters';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFirefox } from '@fortawesome/free-brands-svg-icons';
-
-const MOZILLA_BASE64_URL = 'https://developer.mozilla.org/en-US/docs/Glossary/Base64';
+import { MOZILLA_BASE64_URL } from '~/constants/links';
 
 export default function Base64converter() {
   const [selectedType, setSelectedType] = useState<'encode' | 'decode'>('encode');
@@ -41,7 +40,7 @@ export default function Base64converter() {
       </Grid.Col>
       <Grid.Col span={12} sx={{ height: '90%' }}>
         <Grid sx={{ height: '100%' }}>
-          <Grid.Col span={5}>
+          <Grid.Col md={5} sm={12}>
             <Textarea
               placeholder="Enter text here"
               value={input}
@@ -54,7 +53,7 @@ export default function Base64converter() {
               onChange={onChangeInput}
             />
           </Grid.Col>
-          <Grid.Col span={2} sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center' }}>
+          <Grid.Col md={2} sm={12} sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center' }}>
             <RadioGroup
               variant="vertical"
               value={selectedType}
@@ -64,7 +63,7 @@ export default function Base64converter() {
               <Radio value="decode">Decode</Radio>
             </RadioGroup>
           </Grid.Col>
-          <Grid.Col span={5}>
+          <Grid.Col md={5} sm={12}>
             <Textarea
               placeholder="You will see results here"
               value={result}
