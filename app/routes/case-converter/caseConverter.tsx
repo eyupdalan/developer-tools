@@ -1,4 +1,4 @@
-import {Grid, Radio, RadioGroup, Textarea} from "@mantine/core";
+import {Grid, Radio, RadioGroup, Textarea, Title} from "@mantine/core";
 import {ChangeEvent, useEffect, useState} from "react";
 import words from "lodash/words";
 import upperFirst from "lodash/upperFirst";
@@ -42,47 +42,51 @@ export default function CaseConverter() {
     }
 
     return (
-        <Grid sx={{height: "100%"}}>
-            <Grid.Col span={5}>
-                <Textarea
-                    placeholder={"Enter text here"}
-                    radius={"lg"}
-                    value={input}
-                    multiline
-                    styles={{
-                        root: {height: "100%"},
-                        wrapper: {height: "100%"},
-                        input: {height: "100%!important"}
-                    }}
-                    onChange={onChangeInput}
-                />
+        <Grid sx={{height: "100%"}} align={"flex-start"} justify={"flex-start"}>
+            <Grid.Col span={12}>
+                <Title order={2}>Case Converter</Title>
             </Grid.Col>
-            <Grid.Col span={2} sx={{display: "flex", alignItems: "flex-start", justifyContent: "center"}}>
-                <RadioGroup
-                    variant="vertical"
-                    label="Select case"
-                    value={selectedCase}
-                    onChange={onChangeCase}
-                >
-                    <Radio value="normal">Normal</Radio>
-                    <Radio value="uppercase">Uppercase</Radio>
-                    <Radio value="lowercase">Lowercase</Radio>
-                    <Radio value="startcase">Start case</Radio>
-                </RadioGroup>
-            </Grid.Col>
-            <Grid.Col span={5}>
-                <Textarea
-                    placeholder={"You will see results here"}
-                    radius={"lg"}
-                    value={result}
-                    minRows={7}
-                    multiline
-                    styles={{
-                        root: {height: "100%"},
-                        wrapper: {height: "100%"},
-                        input: {height: "100%!important"}
-                    }}
-                />
+            <Grid.Col span={12} sx={{height: "90%"}} gutter={"sm"}>
+                <Grid sx={{height: "100%"}}>
+                    <Grid.Col span={5}>
+                        <Textarea
+                            placeholder={"Enter text here"}
+                            value={input}
+                            multiline
+                            styles={{
+                                root: {height: "100%"},
+                                wrapper: {height: "100%"},
+                                input: {height: "100%!important"}
+                            }}
+                            onChange={onChangeInput}
+                        />
+                    </Grid.Col>
+                    <Grid.Col span={2} sx={{display: "flex", alignItems: "flex-start", justifyContent: "center"}}>
+                        <RadioGroup
+                            variant="vertical"
+                            value={selectedCase}
+                            onChange={onChangeCase}
+                        >
+                            <Radio value="normal">Normal</Radio>
+                            <Radio value="uppercase">Uppercase</Radio>
+                            <Radio value="lowercase">Lowercase</Radio>
+                            <Radio value="startcase">Start case</Radio>
+                        </RadioGroup>
+                    </Grid.Col>
+                    <Grid.Col span={5}>
+                        <Textarea
+                            placeholder={"You will see results here"}
+                            value={result}
+                            minRows={7}
+                            multiline
+                            styles={{
+                                root: {height: "100%"},
+                                wrapper: {height: "100%"},
+                                input: {height: "100%!important"}
+                            }}
+                        />
+                    </Grid.Col>
+                </Grid>
             </Grid.Col>
         </Grid>
     )

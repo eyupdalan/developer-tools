@@ -2,6 +2,11 @@ import {Navbar as MNavbar} from "@mantine/core";
 import {NavbarProps} from "./layout.types";
 import {faFont, faLaptopCode} from "@fortawesome/free-solid-svg-icons";
 import MenuItem from "~/components/Layout/menuItem";
+import MenuFooter from "~/components/Layout/menuFooter";
+
+export const CASE_CONVERTER_URL: string = "/case-converter";
+export const BASE64_CONVERTER_URL: string = "/base64-converter";
+export const GITHUB_REPO_URL: string = "https://github.com/eyupdalan/developer-tools";
 
 export default function Navbar({opened}: NavbarProps) {
     return (
@@ -15,10 +20,12 @@ export default function Navbar({opened}: NavbarProps) {
             }}
         >
             <MNavbar.Section grow mt="lg">
-                <MenuItem link={"/case-converter"} font={faFont} title={"Case Converter"}/>
-                <MenuItem link={"/base64-converter"} font={faLaptopCode} title={"Base64 Converter"}/>
+                <MenuItem link={CASE_CONVERTER_URL} font={faFont} title={"Case Converter"}/>
+                <MenuItem link={BASE64_CONVERTER_URL} font={faLaptopCode} title={"Base64 Converter"}/>
             </MNavbar.Section>
-            <MNavbar.Section>Footer</MNavbar.Section>
+            <MNavbar.Section>
+                <MenuFooter/>
+            </MNavbar.Section>
         </MNavbar>
     )
 }

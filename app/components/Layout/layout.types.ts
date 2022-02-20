@@ -19,7 +19,8 @@ interface NavbarProps {
 interface MenuItemProps {
     link: string,
     font: IconProp,
-    title: string
+    title: string,
+    color?: string
 }
 
 export type { LayoutProps, HeaderProps, NavbarProps, MenuItemProps };

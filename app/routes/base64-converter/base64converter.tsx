@@ -1,6 +1,10 @@
-import {Grid, Radio, RadioGroup, Textarea} from "@mantine/core";
+import {Button, Grid, Radio, RadioGroup, Textarea, Title} from "@mantine/core";
 import {ChangeEvent, useEffect, useState} from "react";
 import {base64DecToArr, base64EncArr, strToUTF8Arr, UTF8ArrToStr} from "~/routes/base64-converter/converters";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faFirefox} from "@fortawesome/free-brands-svg-icons";
+
+const MOZILLA_BASE64_URL = "https://developer.mozilla.org/en-US/docs/Glossary/Base64";
 
 export default function Base64converter() {
     const [selectedType, setSelectedType] = useState<"encode" | "decode">("encode");
@@ -27,46 +31,63 @@ export default function Base64converter() {
     }
 
     return (
-        <Grid sx={{height: "100%"}}>
-            <Grid.Col span={5}>
-                <Textarea
-                    placeholder={"Enter text here"}
-                    radius={"lg"}
-                    value={input}
-                    multiline
-                    styles={{
-                        root: {height: "100%"},
-                        wrapper: {height: "100%"},
-                        input: {height: "100%!important"}
-                    }}
-                    onChange={onChangeInput}
-                />
-            </Grid.Col>
-            <Grid.Col span={2} sx={{display: "flex", alignItems: "flex-start", justifyContent: "center"}}>
-                <RadioGroup
-                    variant="vertical"
-                    label="Select case"
-                    value={selectedType}
-                    onChange={onChangeType}
-                >
-                    <Radio value="encode">Encode</Radio>
-                    <Radio value="decode">Decode</Radio>
-                </RadioGroup>
-            </Grid.Col>
-            <Grid.Col span={5}>
-                <Textarea
-                    placeholder={"You will see results here"}
-                    radius={"lg"}
-                    value={result}
-                    minRows={7}
-                    multiline
-                    styles={{
-                        root: {height: "100%"},
-                        wrapper: {height: "100%"},
-                        input: {height: "100%!important"}
-                    }}
-                />
-            </Grid.Col>
-        </Grid>
+        <>
+            <Grid sx={{height: "100%"}}>
+                <Grid.Col span={12}>
+                    <Title order={2}>Base64 Converter</Title>
+                </Grid.Col>
+                <Grid.Col span={12} sx={{height: "90%"}}>
+                    <Grid sx={{height: "100%"}}>
+                        <Grid.Col span={5}>
+                            <Textarea
+                                placeholder={"Enter text here"}
+                                value={input}
+                                multiline
+                                styles={{
+                                    root: {height: "100%"},
+                                    wrapper: {height: "100%"},
+                                    input: {height: "100%!important"}
+                                }}
+                                onChange={onChangeInput}
+                            />
+                        </Grid.Col>
+                        <Grid.Col span={2} sx={{display: "flex", alignItems: "flex-start", justifyContent: "center"}}>
+                            <RadioGroup
+                                variant="vertical"
+                                value={selectedType}
+                                onChange={onChangeType}
+                            >
+                                <Radio value="encode">Encode</Radio>
+                                <Radio value="decode">Decode</Radio>
+                            </RadioGroup>
+                        </Grid.Col>
+                        <Grid.Col span={5}>
+                            <Textarea
+                                placeholder={"You will see results here"}
+                                value={result}
+                                minRows={7}
+                                multiline
+                                styles={{
+                                    root: {height: "100%"},
+                                    wrapper: {height: "100%"},
+                                    input: {height: "100%!important"}
+                                }}
+                            />
+                        </Grid.Col>
+                    </Grid>
+                </Grid.Col>
+                <Grid.Col span={12}>
+                    <Button
+                        component={"a"}
+                        href={MOZILLA_BASE64_URL}
+                        target="_blank"
+                        variant={"light"}
+                        leftIcon={<FontAwesomeIcon icon={faFirefox} color={"orange"}/>}
+                    >
+                        Source: {MOZILLA_BASE64_URL}
+                    </Button>
+                </Grid.Col>
+            </Grid>
+        </>
     )
 }

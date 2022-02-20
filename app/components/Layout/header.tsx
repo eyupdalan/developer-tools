@@ -4,7 +4,7 @@ import {
     Group,
     Header as MHeader,
     MediaQuery,
-    Text,
+    Text, Title,
     UnstyledButton,
     useMantineTheme
 } from "@mantine/core";
@@ -36,9 +36,9 @@ export default function Header({opened, setOpened}: HeaderProps) {
                     <UnstyledButton>
                         <Group>
                             <Avatar>
-                                <FontAwesomeIcon icon={faScrewdriverWrench} size={"2x"}/>
+                                <FontAwesomeIcon icon={faScrewdriverWrench} size={"2x"} color={"black"}/>
                             </Avatar>
-                            <Text>Developer Tools</Text>
+                            <Title order={1}>Developer Tools</Title>
                         </Group>
                     </UnstyledButton>
                 </Link>
