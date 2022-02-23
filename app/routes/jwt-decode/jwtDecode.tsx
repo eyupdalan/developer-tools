@@ -28,7 +28,6 @@ export default function JwtDecode() {
       setHeader(decodedHeader);
       setPayload(decoded);
       setError('');
-      ref.current!.focus();
     } catch (ex:any) {
       setHeader({});
       setPayload({});
