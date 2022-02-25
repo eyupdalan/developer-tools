@@ -5,43 +5,64 @@
   xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
 >
   <url>
+    <loc>/uri-encode-decode/uriEncodeDecode</loc>
+    <lastmod>2022-02-25T09:45:33.904Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>/base64-converter/base64converter</loc>
-    <lastmod>2022-02-23T16:07:26.648Z</lastmod>
+    <lastmod>2022-02-25T09:45:33.904Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>/case-converter/caseConverter</loc>
-    <lastmod>2022-02-23T16:07:26.648Z</lastmod>
+    <lastmod>2022-02-25T09:45:33.904Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>/uri-encode-decode</loc>
+    <lastmod>2022-02-25T09:45:33.904Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>/base64-converter</loc>
-    <lastmod>2022-02-23T16:07:26.648Z</lastmod>
+    <lastmod>2022-02-25T09:45:33.904Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>/uri-encode-decode/view</loc>
+    <lastmod>2022-02-25T09:45:33.904Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>/case-converter</loc>
-    <lastmod>2022-02-23T16:07:26.648Z</lastmod>
+    <lastmod>2022-02-25T09:45:33.904Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>/jwt-decode/jwtDecode</loc>
-    <lastmod>2022-02-23T16:07:26.648Z</lastmod>
+    <lastmod>2022-02-25T09:45:33.904Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>/jwt-decode</loc>
-    <lastmod>2022-02-23T16:07:26.648Z</lastmod>
+    <lastmod>2022-02-25T09:45:33.904Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
