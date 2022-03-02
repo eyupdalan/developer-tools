@@ -1,7 +1,7 @@
 {
   "extends": [
-    "airbnb",
-    "airbnb/hooks",
+//    "airbnb",
+//    "airbnb/hooks",
     "@remix-run/eslint-config",
     "@remix-run/eslint-config/jest"
   ],
